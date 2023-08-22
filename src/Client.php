@@ -70,6 +70,12 @@ class Client
     /** @var Endpoint\Collections */
     public $collection;
 
+    /** @var Endpoint\V2\Relations */
+    public $relations;
+
+     /** @var Endpoint\V2\Objects */
+     public $objects;
+
     /**
      * Client constructor.
      * @param string $apiKey Api Key
@@ -98,6 +104,8 @@ class Client
                 break;
             case 2:
                 $this->customers = new Endpoint\V2\Customers($this);
+                $this->relations = new Endpoint\V2\Relations($this);
+                $this->objects = new Endpoint\V2\Objects($this);
                 break;
             default:
                 break;

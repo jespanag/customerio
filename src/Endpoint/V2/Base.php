@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\RequestExceptionInterface;
 
-class BaseV2
+class Base
 {
     /** @var Client */
     protected $client;
