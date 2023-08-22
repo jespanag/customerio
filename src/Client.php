@@ -79,25 +79,35 @@ class Client
     public function __construct(string $apiKey, string $siteId, array $options = [])
     {
         $this->setDefaultClient();
-        $this->events = new Endpoint\Events($this);
-        $this->customers = new Endpoint\Customers($this);
-        $this->page = new Endpoint\Page($this);
-        $this->campaigns = new Endpoint\Campaigns($this);
-        $this->messages = new Endpoint\Messages($this);
-        $this->messageTemplates = new Endpoint\MessageTemplates($this);
-        $this->newsletters = new Endpoint\Newsletters($this);
-        $this->segments = new Endpoint\Segments($this);
-        $this->exports = new Endpoint\Exports($this);
-        $this->activities = new Endpoint\Activities($this);
-        $this->senderIdentities = new Endpoint\SenderIdentities($this);
-        $this->send = new Endpoint\Send($this);
-        $this->collection = new Endpoint\Collections($this);
+
+        switch ($options['version'] ?? 1) {
+            case 1:
+                $this->events = new Endpoint\Events($this);
+                $this->customers = new Endpoint\Customers($this);
+                $this->page = new Endpoint\Page($this);
+                $this->campaigns = new Endpoint\Campaigns($this);
+                $this->messages = new Endpoint\Messages($this);
+                $this->messageTemplates = new Endpoint\MessageTemplates($this);
+                $this->newsletters = new Endpoint\Newsletters($this);
+                $this->segments = new Endpoint\Segments($this);
+                $this->exports = new Endpoint\Exports($this);
+                $this->activities = new Endpoint\Activities($this);
+                $this->senderIdentities = new Endpoint\SenderIdentities($this);
+                $this->send = new Endpoint\Send($this);
+                $this->collection = new Endpoint\Collections($this);
+                break;
+            case 2:
+                $this->customers = new Endpoint\V2\Customers($this);
+                break;
+            default:
+                break;
+        }
 
         $this->apiKey = $apiKey;
         $this->siteId = $siteId;
         $this->assocResponse = false;
 
-        $this->region = Region::factory($options['region'] ?? 'us');
+        $this->region = Region::factory($options['region'] ?? 'us', $options['version'] ?? 1);
     }
 
     /**

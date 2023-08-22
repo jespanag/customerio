@@ -26,6 +26,26 @@ class Base
      * @param array $extra
      * @return string
      */
+    public function singlePathV2($id = null, array $extra = []): string
+    {
+        return $this->generatePath('entity', $id, $extra);
+    }
+
+    /**
+     * @param null $id
+     * @param array $extra
+     * @return string
+     */
+    public function batchPathV2($id = null, array $extra = []): string
+    {
+        return $this->generatePath('batch', $id, $extra);
+    }
+
+    /**
+     * @param null $id
+     * @param array $extra
+     * @return string
+     */
     public function customerPath($id = null, array $extra = []): string
     {
         return $this->generatePath('customers', $id, $extra);

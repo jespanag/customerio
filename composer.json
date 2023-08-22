@@ -1,11 +1,14 @@
 {
-    "name": "printu/customerio",
-    "description": "PHP API for Customer.io",
+    "name": "jespanag/customerio",
+    "description": "PHP API for Customer.io with v2 support",
     "keywords": [
         "http",
         "rest",
         "customer.io",
         "customerio",
+        "customerio v2",
+        "customer.io v2",
+        "v2",
         "api",
         "client"
     ],
@@ -17,6 +20,11 @@
             "name": "Paweł Krzaczkowski",
             "email": "pawel@freshmind.pl",
             "homepage": "https://github.com/krzaczek"
+        },
+        {
+            "name": "Juan España",
+            "email": "juan@bytehide.com",
+            "homepage": "https://github.com/jespanag"
         }
     ],
     "minimum-stability": "stable",
