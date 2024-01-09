@@ -21,19 +21,26 @@ class Customers extends Base
 
     /**
      * Register customer event
+     * @param string $name
      * @param array $options
      * @return mixed
      * @throws GuzzleException
      */
-    public function event(array $options)
+    public function event(string $name, array $options)
     {
         if (!isset($options['id']) && !isset($options['email']) && !isset($options['cio_id'])) {
             $this->mockException('User id, email or cio_id is required!', 'POST');
         } // @codeCoverageIgnore
 
+        if (!isset($name)) {
+            $this->mockException('Event name required!', 'POST');
+        } // @codeCoverageIgnore
+
+        $options['name'] = $name;
+
         $path = $this->setCustomerPathWithIdentifier($options);
 
-        return $this->client->post($path."/events", $options);
+        return $this->client->post($path . "/events", $options);
     }
 
     /**

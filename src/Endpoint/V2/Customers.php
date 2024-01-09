@@ -61,6 +61,13 @@ class Customers extends Base
 
     }
 
+    /**
+     * Register customer event
+     * @param string $name
+     * @param array $options
+     * @return mixed
+     * @throws GuzzleException
+     */
     public function event(string $name, array $attributes)
     {
         if (!isset($attributes['id']) && !isset($attributes['email']) && !isset($attributes['cio_id'])) {
@@ -79,7 +86,7 @@ class Customers extends Base
         $this->setIdentifierFromAttributes($attributes, $body);
 
         $body["name"] = $name;
-        $body["attributes"] = $attributes;
+        $body["attributes"] = $attributes['data'];
 
         return $this->client->post($this->singlePath(), $body);
     }
