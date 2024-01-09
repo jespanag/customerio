@@ -60,4 +60,27 @@ class Customers extends Base
         unset($attributes[$customerIdentifierProperty]);
 
     }
+
+    public function event(string $name, array $attributes)
+    {
+        if (!isset($attributes['id']) && !isset($attributes['email']) && !isset($attributes['cio_id'])) {
+            $this->mockException('User id or email is required!', 'POST');
+        } // @codeCoverageIgnore
+
+        if (!isset($name)) {
+            $this->mockException('Event name required!', 'POST');
+        } // @codeCoverageIgnore
+
+        $body = [
+            "type" => "person",
+            "action" => "event",
+        ];
+
+        $this->setIdentifierFromAttributes($attributes, $body);
+
+        $body["name"] = $name;
+        $body["attributes"] = $attributes;
+
+        return $this->client->post($this->singlePath(), $body);
+    }
 }
